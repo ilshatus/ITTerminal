@@ -1,0 +1,15 @@
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ITTerminal.exe.config
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ITTerminal.exe
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ITTerminal.pdb
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.csprojResolveAssemblyReference.cache
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.BypassSheetMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.ExchangeMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.GetMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.LostMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.GeneralMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.ReturnMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.TransferMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.Properties.Resources.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.csproj.GenerateResource.Cache
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.exe
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ITTerminal.pdb
