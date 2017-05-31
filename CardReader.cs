@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.IO.Ports;
 
-namespace WpfApplication1
+namespace ITTerminal
 {
     class CardReader
     {

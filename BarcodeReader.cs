@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
-namespace WpfApplication1
+namespace ITTerminal
 {
     public class BarcodeReader
     {
