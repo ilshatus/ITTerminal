@@ -12,6 +12,8 @@ namespace ITTerminal
     {
         static string orgName = ConfigurationManager.ConnectionStrings["OrgName"].ConnectionString;
         static string stockName = ConfigurationManager.ConnectionStrings["stockName"].ConnectionString;
+        static string login = ConfigurationManager.ConnectionStrings["login"].ConnectionString;
+        static string password = ConfigurationManager.ConnectionStrings["password"].ConnectionString;
 
         /// <summary>
         /// This method moves equipment from one place to another. All the parameters must be given as a string
@@ -38,7 +40,7 @@ namespace ITTerminal
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
-            request.Credentials = new System.Net.NetworkCredential("1cTeam1", "k&jH32!4qS");
+            request.Credentials = new System.Net.NetworkCredential(login, password);
 
             HttpWebResponse response;
             try
@@ -67,7 +69,7 @@ namespace ITTerminal
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
-            request.Credentials = new System.Net.NetworkCredential("1cTeam1", "k&jH32!4qS");
+            request.Credentials = new System.Net.NetworkCredential(login, password);
 
             HttpWebResponse response;
             try
@@ -91,17 +93,17 @@ namespace ITTerminal
         }
 
         /// <summary>
-        /// This method gets an equipment ID as a parameter and returns User class at which is equipment now.
+        /// This method gets an equipment ID as a parameter and returns username at which is equipment now.
         /// </summary>
         /// <param name="ID">equipment ID</param>
-        /// <returns>User class if equipment exists and no errors occured, null - otherwise.</returns>
-        private static User whereIsEquipment(string ID)
+        /// <returns>string if equipment exists and no errors occured, null - otherwise.</returns>
+        private static string whereIsEquipment(string ID)
         {
             StringBuilder requestString = new StringBuilder(ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString + "hs/whos/" + ID);
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
-            request.Credentials = new System.Net.NetworkCredential("1cTeam1", "k&jH32!4qS");
+            request.Credentials = new System.Net.NetworkCredential(login, password);
 
             HttpWebResponse response;
             try
@@ -118,7 +120,7 @@ namespace ITTerminal
             string type = streamReader.ReadLine();
             string name = streamReader.ReadLine();
 
-            return new User(name, "");
+            return name;
         }
 
         /// <summary>
@@ -133,7 +135,7 @@ namespace ITTerminal
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
-            request.Credentials = new System.Net.NetworkCredential("1cTeam1", "k&jH32!4qS");
+            request.Credentials = new System.Net.NetworkCredential(login, password);
 
             HttpWebResponse response;
             try
@@ -169,7 +171,7 @@ namespace ITTerminal
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
-            request.Credentials = new System.Net.NetworkCredential("1cTeam1", "k&jH32!4qS");
+            request.Credentials = new System.Net.NetworkCredential(login, password);
 
             HttpWebResponse response;
             try
@@ -197,22 +199,24 @@ namespace ITTerminal
 
         static bool getEquipment(User user, Equipment equipment)
         {
-            User placeWhere = whereIsEquipment(equipment.Id);
-            if (placeWhere.Name.Equals("Утеряно"))
+            string placeWhere = whereIsEquipment(equipment.Id);
+            if (placeWhere == null || placeWhere.Equals("Утеряно"))
                 return false;
-            return moveEquipment(orgName, orgName, placeWhere.Name, user.Name, equipment.Id);
+            return moveEquipment(orgName, orgName, placeWhere, user.Name, equipment.Id);
         }
 
         static bool returnEquipment(Equipment equipment)
         {
-            User placeWhere = whereIsEquipment(equipment.Id);
-            return moveEquipment(orgName, orgName, placeWhere.Name, stockName, equipment.Id);
+            string placeWhere = whereIsEquipment(equipment.Id);
+            if (placeWhere.Equals("Утеряно"))
+                return false;
+            return moveEquipment(orgName, orgName, placeWhere, stockName, equipment.Id);
         }
 
         static bool lostEquipment(Equipment equipment)
         {
-            User placeWhere = whereIsEquipment(equipment.Id);
-            return moveEquipment(orgName, orgName, placeWhere.Name, "Утеряно", equipment.Id);
+            string placeWhere = whereIsEquipment(equipment.Id);
+            return moveEquipment(orgName, orgName, placeWhere, "Утеряно", equipment.Id);
         }
     }
 }
