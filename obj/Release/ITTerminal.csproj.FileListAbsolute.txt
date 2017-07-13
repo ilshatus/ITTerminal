@@ -1,0 +1,16 @@
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\ITTerminal.exe.config
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\ITTerminal.exe
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\ITTerminal.pdb
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.csprojResolveAssemblyReference.cache
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.BypassSheetMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.ExchangeMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.GetMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.LostMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.GeneralMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.ReturnMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.TransferMenu.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.Properties.Resources.resources
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.csproj.GenerateResource.Cache
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.exe
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\ITTerminal.pdb
+C:\Users\Ilshat\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\Bunifu_UI_v1.5.3.dll

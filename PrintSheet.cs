@@ -19,12 +19,19 @@ namespace ITTerminal
         {
             //  INPUT NEEDED INFORMATION
             excelapp = new Excel.Application();
-            workbook = excelapp.Workbooks.Open(
+            try
+            {
+                workbook = excelapp.Workbooks.Open(
                 ConfigurationManager.ConnectionStrings["path"].ConnectionString + "GetSheet.xlsx",
                 Type.Missing, false, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing);
+            }
+            catch (Exception)
+            {
+                return;
+            }
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
             worksheet.Cells[7, 2] = ConfigurationManager.ConnectionStrings["stockName"].ConnectionString;
@@ -50,12 +57,19 @@ namespace ITTerminal
         {
             //  INPUT NEEDED INFORMATION
             excelapp = new Excel.Application();
-            workbook = excelapp.Workbooks.Open(
+            try
+            {
+                workbook = excelapp.Workbooks.Open(
                 ConfigurationManager.ConnectionStrings["path"].ConnectionString + "ReturnSheet.xlsx",
                 Type.Missing, false, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing);
+            }
+            catch (Exception)
+            {
+                return;
+            }
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
             worksheet.Cells[7, 2] = ConfigurationManager.ConnectionStrings["stockName"].ConnectionString;
@@ -67,6 +81,7 @@ namespace ITTerminal
 
             //  PRINT SHEET
             Drawing.Printing.PrinterSettings settings = new Drawing.Printing.PrinterSettings();
+            
             String printerName = settings.PrinterName.ToString();
             worksheet.PrintOutEx(1, 1, 2, false, printerName,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing);
@@ -80,12 +95,19 @@ namespace ITTerminal
         {
             //  INPUT NEEDED INFORMATION
             excelapp = new Excel.Application();
-            workbook = excelapp.Workbooks.Open(
+            try
+            {
+                workbook = excelapp.Workbooks.Open(
                 ConfigurationManager.ConnectionStrings["path"].ConnectionString + "TransferSheet.xlsx",
                 Type.Missing, false, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing);
+            }
+            catch (Exception)
+            {
+                return;
+            }
             worksheet = (Excel.Worksheet)workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
             worksheet.Cells[7, 2] = toUser.Name;
@@ -111,12 +133,19 @@ namespace ITTerminal
         {
             //  INPUT NEEDED INFORMATION
             excelapp = new Excel.Application();
-            workbook = excelapp.Workbooks.Open(
+            try
+            {
+                workbook = excelapp.Workbooks.Open(
                 ConfigurationManager.ConnectionStrings["path"].ConnectionString + "ExchangeSheet.xlsx",
                 Type.Missing, false, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing);
+            }
+            catch (Exception)
+            {
+                return;
+            }
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
             worksheet.Cells[7, 2] = user.Name;
@@ -145,12 +174,19 @@ namespace ITTerminal
         {
             //  INPUT NEEDED INFORMATION
             excelapp = new Excel.Application();
-            workbook = excelapp.Workbooks.Open(
+            try
+            {
+                workbook = excelapp.Workbooks.Open(
                 ConfigurationManager.ConnectionStrings["path"].ConnectionString + "LostSheet.xlsx",
                 Type.Missing, false, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing);
+            }
+            catch (Exception)
+            {
+                return;
+            }
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
             worksheet.Cells[8, 2] = user.Name;

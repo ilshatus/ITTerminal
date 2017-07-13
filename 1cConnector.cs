@@ -8,12 +8,13 @@ using System.Configuration;
 
 namespace ITTerminal
 {
-    class Connector
+    class Connector1C
     {
         static string orgName = ConfigurationManager.ConnectionStrings["OrgName"].ConnectionString;
         static string stockName = ConfigurationManager.ConnectionStrings["stockName"].ConnectionString;
         static string login = ConfigurationManager.ConnectionStrings["login"].ConnectionString;
         static string password = ConfigurationManager.ConnectionStrings["password"].ConnectionString;
+        static string page = ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString;
 
         /// <summary>
         /// This method moves equipment from one place to another. All the parameters must be given as a string
@@ -27,7 +28,7 @@ namespace ITTerminal
         /// <returns>string containing number of movement or text of reason of error</returns>
         private static bool moveEquipment(string orgFrom, string orgTo, string placeFrom, string placeTo, string equipmentID)
         {
-            StringBuilder requestString = new StringBuilder(ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString + "hs/move/");
+            StringBuilder requestString = new StringBuilder(page + "hs/move/");
             requestString.Append(orgFrom);
             requestString.Append("/");
             requestString.Append(orgTo);
@@ -55,6 +56,7 @@ namespace ITTerminal
             /*Stream stream = response.GetResponseStream();
             StreamReader streamReader = new StreamReader(stream);
             return streamReader.ReadToEnd();*/
+            response.Close();
             return true;
         }
 
@@ -63,13 +65,13 @@ namespace ITTerminal
         /// </summary>
         /// <param name="ID">(inventory number = barcode) of equipment</param>
         /// <returns>Equipment class if this equipment is in base and no errors occured, null - otherwise.</returns>
-        static Equipment getEquipmentByID(string ID)
+        public static Equipment getEquipmentByID(string ID)
         {
-            StringBuilder requestString = new StringBuilder(ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString + "hs/equipmentInfo/" + ID);
+            StringBuilder requestString = new StringBuilder(page + "hs/equipmentInfo/" + ID);
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
-            request.Credentials = new System.Net.NetworkCredential(login, password);
+            request.Credentials = new System.Net.NetworkCredential("1cTeam1", "k&jH32!4qS");
 
             HttpWebResponse response;
             try
@@ -83,13 +85,20 @@ namespace ITTerminal
 
             Stream stream = response.GetResponseStream();
             StreamReader streamReader = new StreamReader(stream);
-            string name = streamReader.ReadLine();
-            if (name == "No such equipment")
+            string placeType = streamReader.ReadLine();
+            if (placeType.Equals("No such equipment"))
                 return null;
+            string name = streamReader.ReadLine();
             string type = streamReader.ReadLine();
             string serial = streamReader.ReadLine();
 
-            return new Equipment(name, type, ID, serial);
+            response.Close();
+            stream.Close();
+            streamReader.Close();
+            if (placeType.Equals("Склад"))
+                return new Equipment(name, type, ID, serial);
+            else
+                return null;
         }
 
         /// <summary>
@@ -97,9 +106,9 @@ namespace ITTerminal
         /// </summary>
         /// <param name="ID">equipment ID</param>
         /// <returns>string if equipment exists and no errors occured, null - otherwise.</returns>
-        private static string whereIsEquipment(string ID)
+        public static string whereIsEquipment(string ID)
         {
-            StringBuilder requestString = new StringBuilder(ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString + "hs/whos/" + ID);
+            StringBuilder requestString = new StringBuilder(page + "hs/whos/" + ID);
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
@@ -119,6 +128,10 @@ namespace ITTerminal
             StreamReader streamReader = new StreamReader(stream);
             string type = streamReader.ReadLine();
             string name = streamReader.ReadLine();
+
+            response.Close();
+            stream.Close();
+            streamReader.Close();
 
             return name;
         }
@@ -129,9 +142,9 @@ namespace ITTerminal
         /// <param name="ID">equipment ID</param>
         /// <returns>Equipment class if it exists, is in storage; Null in cases, when equipment does not exist or
         /// is not in storage (at a person, etc.) or error occured.</returns>
-        private static Equipment doesSomeoneHasEquipment(string ID)
+        public static Equipment doesSomeoneHasEquipment(string ID)
         {
-            StringBuilder requestString = new StringBuilder(ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString + "hs/someones/" + ID);
+            StringBuilder requestString = new StringBuilder(page + "hs/someones/" + ID);
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
@@ -153,7 +166,11 @@ namespace ITTerminal
             string name = streamReader.ReadLine();
             string equipmentType = streamReader.ReadLine();
             string serial = streamReader.ReadLine();
-            if (type == "Склад")
+
+            response.Close();
+            stream.Close();
+            streamReader.Close();
+            if (type != "Склад" && type != "Утеряно" && type != null)
             {
                 return new Equipment(name, equipmentType, ID, serial);
             }
@@ -165,9 +182,9 @@ namespace ITTerminal
         /// </summary>
         /// <param name="username">string of a place. Exactly as in 1c base.</param>
         /// <returns>Array of equipment, which the place have.</returns>
-        static Equipment[] getListOfEquipment(User user)
+        public static Equipment[] getListOfEquipment(User user)
         {
-            StringBuilder requestString = new StringBuilder(ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString + "hs/getList/" + user.Name);
+            StringBuilder requestString = new StringBuilder(page + "hs/getList/" + user.Name);
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
@@ -194,10 +211,13 @@ namespace ITTerminal
                 string serial = streamReader.ReadLine();
                 resultList.Add(new Equipment(name, type, id, serial));
             }
+            response.Close();
+            stream.Close();
+            streamReader.Close();
             return resultList.ToArray();
         }
 
-        static bool getEquipment(User user, Equipment equipment)
+        public static bool getEquipment(User user, Equipment equipment)
         {
             string placeWhere = whereIsEquipment(equipment.Id);
             if (placeWhere == null || placeWhere.Equals("Утеряно"))
@@ -205,7 +225,7 @@ namespace ITTerminal
             return moveEquipment(orgName, orgName, placeWhere, user.Name, equipment.Id);
         }
 
-        static bool returnEquipment(Equipment equipment)
+        public static bool returnEquipment(Equipment equipment)
         {
             string placeWhere = whereIsEquipment(equipment.Id);
             if (placeWhere.Equals("Утеряно"))
@@ -213,7 +233,7 @@ namespace ITTerminal
             return moveEquipment(orgName, orgName, placeWhere, stockName, equipment.Id);
         }
 
-        static bool lostEquipment(Equipment equipment)
+        public static bool lostEquipment(Equipment equipment)
         {
             string placeWhere = whereIsEquipment(equipment.Id);
             return moveEquipment(orgName, orgName, placeWhere, "Утеряно", equipment.Id);

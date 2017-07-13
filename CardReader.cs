@@ -6,7 +6,7 @@ namespace ITTerminal
 {
     class CardReader
     {
-        const string COM_PORT = "COM4";
+        string COM_PORT = ConfigurationManager.ConnectionStrings["CardReaderCOMPort"].ConnectionString;
         private string nfc_code;
         public delegate void NfcReadCallback(string code);
         private NfcReadCallback callback;
@@ -14,25 +14,39 @@ namespace ITTerminal
 
         public CardReader()
         {
-            SerialPort m_mySerialPort;
-            m_mySerialPort = new SerialPort(COM_PORT);
+            try
+            {
+                SerialPort m_mySerialPort;
+                m_mySerialPort = new SerialPort(COM_PORT);
 
-            m_mySerialPort.BaudRate = 9600;
-            m_mySerialPort.Parity = Parity.None;
-            m_mySerialPort.StopBits = StopBits.One;
-            m_mySerialPort.DataBits = 8;
-            m_mySerialPort.Handshake = Handshake.None;
-            m_mySerialPort.RtsEnable = true;
-            m_mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+                m_mySerialPort.BaudRate = 9600;
+                m_mySerialPort.Parity = Parity.None;
+                m_mySerialPort.StopBits = StopBits.One;
+                m_mySerialPort.DataBits = 8;
+                m_mySerialPort.Handshake = Handshake.None;
+                m_mySerialPort.RtsEnable = true;
+                m_mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 
-            m_mySerialPort.Open();
+                m_mySerialPort.Open();
 
-            serialPort = m_mySerialPort;
+                serialPort = m_mySerialPort;
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         public void CloseConnection()
         {
-            serialPort.Close();
+            try
+            {
+                serialPort.Close();
+            }
+            catch (Exception)
+            {
+
+            }            
         }
 
         public void Read(NfcReadCallback cb)

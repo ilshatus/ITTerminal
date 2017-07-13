@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Text;
-using System.Windows;
-using System.Windows.Input;
+using System.Windows.Forms;
+
 namespace ITTerminal
 {
     public class BarcodeReader
     {
         Action<string> barCodeCallback;
-        StringBuilder mScanData = new StringBuilder();
-        KeyConverter mScanKeyConverter = new KeyConverter();
-        KeyEventHandler handler;
-        Window formWindow;
-
-        public BarcodeReader(Window window)
+        StringBuilder mScanData = new StringBuilder();        
+        PreviewKeyDownEventHandler handler;
+        Form formWindow;
+        public BarcodeReader(System.Windows.Forms.Form window)
         {
             formWindow = window;
         }
@@ -20,13 +18,13 @@ namespace ITTerminal
         public void Read(Action<string> callback)
         {
             barCodeCallback = callback;
-            handler = new KeyEventHandler(MainWindow_PreviewKeyDown);
+            handler = new PreviewKeyDownEventHandler(MainWindow_PreviewKeyDown);
             formWindow.PreviewKeyDown += handler;
         }
 
-        void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        void MainWindow_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {    
-          if (e.Key == Key.Return)
+          if (e.KeyCode == Keys.Enter)
             {
                 barCodeCallback(mScanData.ToString());
                 mScanData.Clear();
@@ -34,11 +32,9 @@ namespace ITTerminal
             }
             else
             {
-                string xChar = mScanKeyConverter.ConvertToString(e.Key);
+                char xChar = (char)e.KeyValue;
                 mScanData.Append(xChar);
             }
-
         }
-
     }
 }

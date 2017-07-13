@@ -15,6 +15,31 @@ namespace ITTerminal
         public GeneralMenu()
         {
             InitializeComponent();
+            //////////////////////////////
+            Get.BackColor = Color.FromArgb(150, 0, 0, 0);
+            Get.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 0, 0, 0);
+            Get.FlatAppearance.MouseDownBackColor = Color.FromArgb(220, 0, 0, 0);
+
+            Return.BackColor = Color.FromArgb(150, 0, 0, 0);
+            Return.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 0, 0, 0);
+            Return.FlatAppearance.MouseDownBackColor = Color.FromArgb(220, 0, 0, 0);
+
+            Transfer.BackColor = Color.FromArgb(150, 0, 0, 0);
+            Transfer.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 0, 0, 0);
+            Transfer.FlatAppearance.MouseDownBackColor = Color.FromArgb(220, 0, 0, 0);
+
+            Exchange.BackColor = Color.FromArgb(150, 0, 0, 0);
+            Exchange.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 0, 0, 0);
+            Exchange.FlatAppearance.MouseDownBackColor = Color.FromArgb(220, 0, 0, 0);
+
+            Lost.BackColor = Color.FromArgb(150, 0, 0, 0);
+            Lost.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 0, 0, 0);
+            Lost.FlatAppearance.MouseDownBackColor = Color.FromArgb(220, 0, 0, 0);
+
+            GetBypassSheet.BackColor = Color.FromArgb(150, 0, 0, 0);
+            GetBypassSheet.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 0, 0, 0);
+            GetBypassSheet.FlatAppearance.MouseDownBackColor = Color.FromArgb(220, 0, 0, 0);
+            ///////////////////////////////
         }
 
         private void menu_Load(object sender, EventArgs e)
@@ -60,8 +85,9 @@ namespace ITTerminal
 
         private void panel1_Resize(object sender, EventArgs e)
         {
-            int height = (panel1.Height - 3) / 2;
-            int width = (panel1.Width - 4) / 3;
+            int ind = 5;
+            int height = (GeneralPanel.Height - 2 * ind - 2) / 3;
+            int width = (GeneralPanel.Width - ind - 2) / 2;
             Get.Size = new Size(width, height);
             Return.Size = new Size(width, height);
             Transfer.Size = new Size(width, height);
@@ -69,16 +95,12 @@ namespace ITTerminal
             Lost.Size = new Size(width, height);
             GetBypassSheet.Size = new Size(width, height);
             Get.Location = new Point(1, 1);
-            Return.Location = new Point(width + 2, 1);
-            Transfer.Location = new Point(2 * width + 3, 1);
-            Exchange.Location = new Point(1, height + 2);
-            Lost.Location = new Point(width + 2, height + 2);
-            GetBypassSheet.Location = new Point(2 * width + 3, height + 2);
+            Return.Location = new Point(width + 1 + ind, 1);
+            Transfer.Location = new Point(1, height + ind + 1);
+            Exchange.Location = new Point(width + 1 + ind, height + ind + 1);
+            Lost.Location = new Point(1, 2 * height + 1 + 2 * ind);
+            GetBypassSheet.Location = new Point(width + 1 + ind, 2 * height + 1 + 2 * ind);
         }
 
-        private void menu_Load_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }
