@@ -65,7 +65,7 @@ namespace ITTerminal
                 if (admin == null)
                 {
                     admin = CardManager.getUser(id);
-                    if (admin == null || admin.Position == "Сотрудник")
+                    if (admin == null || admin.Position != "Сотрудник")
                     {
                         cardReader.Read(CardId);
                         return;
@@ -73,8 +73,8 @@ namespace ITTerminal
                     waititngCardLabel.Visible = false;
                     AdminCardPanel.BackgroundImage = Properties.Resources.tick;
                     AdminCardPanel.BackgroundImageLayout = ImageLayout.Zoom;
-                    label1.Visible = true;
-                    label1.Text = "Admin: " + admin.Name;
+                    label2.Visible = true;
+                    label2.Text = "Admin: " + admin.Name;
                     if (equipment != null) SubmitButton.Enabled = true;
                 }
             };
@@ -116,6 +116,7 @@ namespace ITTerminal
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
+            cardReader.CloseConnection();
             this.Close();
         }
 
