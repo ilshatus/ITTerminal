@@ -144,6 +144,8 @@ namespace ITTerminal
         {
             if (user != null && equipment != null && DeadlineDate.SelectionStart > DateTime.Today)
                 SubmitButton.Enabled = true;
+            else
+                SubmitButton.Enabled = false;
         }
     }
 }

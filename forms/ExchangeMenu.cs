@@ -161,6 +161,8 @@ namespace ITTerminal
         {
             if (newEquipment != null && admin != null && DeadlineDate.SelectionStart > DateTime.Today)
                 SubmitButton.Enabled = true;
+            else
+                SubmitButton.Enabled = false;
         }
     }
 }
