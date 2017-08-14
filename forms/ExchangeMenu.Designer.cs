@@ -28,26 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Header = new System.Windows.Forms.Panel();
             this.headerLabel = new System.Windows.Forms.Label();
             this.GeneralPanel = new System.Windows.Forms.Panel();
-            this.AdminCardPanel = new System.Windows.Forms.Panel();
-            this.waititngCardLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.MessageLabel = new System.Windows.Forms.Label();
             this.DateBox = new System.Windows.Forms.GroupBox();
             this.DeadlineDate = new System.Windows.Forms.MonthCalendar();
+            this.AdminCardPanel = new System.Windows.Forms.Panel();
+            this.waititngCardLabelRus = new System.Windows.Forms.Label();
+            this.waititngCardLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SubmitButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.OldEquipmentPanel = new System.Windows.Forms.Panel();
+            this.waitingOldEquipmentLabelRus = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.waitingOldEquipmentLabel = new System.Windows.Forms.Label();
             this.NewEquipmentPanel = new System.Windows.Forms.Panel();
+            this.waitingNewEquipmentLabelRus = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.waitingNewEquipmentLabel = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.Header.SuspendLayout();
             this.GeneralPanel.SuspendLayout();
-            this.AdminCardPanel.SuspendLayout();
             this.DateBox.SuspendLayout();
+            this.AdminCardPanel.SuspendLayout();
             this.OldEquipmentPanel.SuspendLayout();
             this.NewEquipmentPanel.SuspendLayout();
             this.SuspendLayout();
@@ -70,9 +76,9 @@
             this.headerLabel.ForeColor = System.Drawing.Color.White;
             this.headerLabel.Location = new System.Drawing.Point(53, 0);
             this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(275, 29);
+            this.headerLabel.Size = new System.Drawing.Size(612, 29);
             this.headerLabel.TabIndex = 0;
-            this.headerLabel.Text = "Exchange equipment";
+            this.headerLabel.Text = "Exchange equipment / Обменять оборудование";
             this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // GeneralPanel
@@ -83,8 +89,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GeneralPanel.BackColor = System.Drawing.Color.Transparent;
             this.GeneralPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.GeneralPanel.Controls.Add(this.AdminCardPanel);
+            this.GeneralPanel.Controls.Add(this.MessageLabel);
             this.GeneralPanel.Controls.Add(this.DateBox);
+            this.GeneralPanel.Controls.Add(this.AdminCardPanel);
             this.GeneralPanel.Controls.Add(this.SubmitButton);
             this.GeneralPanel.Controls.Add(this.CloseButton);
             this.GeneralPanel.Controls.Add(this.OldEquipmentPanel);
@@ -95,18 +102,76 @@
             this.GeneralPanel.TabIndex = 6;
             this.GeneralPanel.Resize += new System.EventHandler(this.GeneralPanel_Resize);
             // 
+            // MessageLabel
+            // 
+            this.MessageLabel.AllowDrop = true;
+            this.MessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MessageLabel.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.MessageLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MessageLabel.Location = new System.Drawing.Point(306, 138);
+            this.MessageLabel.Name = "MessageLabel";
+            this.MessageLabel.Size = new System.Drawing.Size(95, 54);
+            this.MessageLabel.TabIndex = 2;
+            this.MessageLabel.Text = "label3";
+            this.MessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MessageLabel.UseCompatibleTextRendering = true;
+            this.MessageLabel.Visible = false;
+            // 
+            // DateBox
+            // 
+            this.DateBox.Controls.Add(this.DeadlineDate);
+            this.DateBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DateBox.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DateBox.ForeColor = System.Drawing.Color.White;
+            this.DateBox.Location = new System.Drawing.Point(273, 168);
+            this.DateBox.Name = "DateBox";
+            this.DateBox.Size = new System.Drawing.Size(189, 192);
+            this.DateBox.TabIndex = 7;
+            this.DateBox.TabStop = false;
+            this.DateBox.Text = "Deadline date / Срок сдачи";
+            // 
+            // DeadlineDate
+            // 
+            this.DeadlineDate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeadlineDate.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeadlineDate.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.DeadlineDate.Location = new System.Drawing.Point(13, 18);
+            this.DeadlineDate.MaxSelectionCount = 1;
+            this.DeadlineDate.Name = "DeadlineDate";
+            this.DeadlineDate.TabIndex = 0;
+            this.DeadlineDate.TabStop = false;
+            // 
             // AdminCardPanel
             // 
             this.AdminCardPanel.BackColor = System.Drawing.Color.White;
             this.AdminCardPanel.BackgroundImage = global::ITTerminal.Properties.Resources.nfc_image;
             this.AdminCardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.AdminCardPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AdminCardPanel.Controls.Add(this.waititngCardLabelRus);
             this.AdminCardPanel.Controls.Add(this.waititngCardLabel);
             this.AdminCardPanel.Controls.Add(this.label3);
             this.AdminCardPanel.Location = new System.Drawing.Point(40, 179);
             this.AdminCardPanel.Name = "AdminCardPanel";
             this.AdminCardPanel.Size = new System.Drawing.Size(227, 133);
             this.AdminCardPanel.TabIndex = 14;
+            // 
+            // waititngCardLabelRus
+            // 
+            this.waititngCardLabelRus.BackColor = System.Drawing.Color.Transparent;
+            this.waititngCardLabelRus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.waititngCardLabelRus.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.waititngCardLabelRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.waititngCardLabelRus.Location = new System.Drawing.Point(0, 71);
+            this.waititngCardLabelRus.Name = "waititngCardLabelRus";
+            this.waititngCardLabelRus.Size = new System.Drawing.Size(225, 60);
+            this.waititngCardLabelRus.TabIndex = 7;
+            this.waititngCardLabelRus.Text = "Ожидание карты администратора";
+            this.waititngCardLabelRus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // waititngCardLabel
             // 
@@ -134,36 +199,8 @@
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label3.Visible = false;
             // 
-            // DateBox
-            // 
-            this.DateBox.Controls.Add(this.DeadlineDate);
-            this.DateBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DateBox.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DateBox.ForeColor = System.Drawing.Color.White;
-            this.DateBox.Location = new System.Drawing.Point(293, 160);
-            this.DateBox.Name = "DateBox";
-            this.DateBox.Size = new System.Drawing.Size(189, 192);
-            this.DateBox.TabIndex = 13;
-            this.DateBox.TabStop = false;
-            this.DateBox.Text = "Deadline date";
-            // 
-            // DeadlineDate
-            // 
-            this.DeadlineDate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeadlineDate.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeadlineDate.ForeColor = System.Drawing.SystemColors.Window;
-            this.DeadlineDate.Location = new System.Drawing.Point(12, 18);
-            this.DeadlineDate.MaxSelectionCount = 1;
-            this.DeadlineDate.Name = "DeadlineDate";
-            this.DeadlineDate.TabIndex = 0;
-            this.DeadlineDate.TabStop = false;
-            this.DeadlineDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.DeadlineDate_DateChanged);
-            // 
             // SubmitButton
             // 
-            this.SubmitButton.Enabled = false;
             this.SubmitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.SubmitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SubmitButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
@@ -173,7 +210,7 @@
             this.SubmitButton.Size = new System.Drawing.Size(98, 36);
             this.SubmitButton.TabIndex = 11;
             this.SubmitButton.TabStop = false;
-            this.SubmitButton.Text = "Submit";
+            this.SubmitButton.Text = "Submit\r\nПодтвердить";
             this.SubmitButton.UseVisualStyleBackColor = true;
             this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
@@ -189,7 +226,7 @@
             this.CloseButton.Size = new System.Drawing.Size(103, 36);
             this.CloseButton.TabIndex = 12;
             this.CloseButton.TabStop = false;
-            this.CloseButton.Text = "Back to Menu";
+            this.CloseButton.Text = "Back to Menu\r\nВернуться в меню";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
@@ -198,12 +235,26 @@
             this.OldEquipmentPanel.BackColor = System.Drawing.Color.OldLace;
             this.OldEquipmentPanel.BackgroundImage = global::ITTerminal.Properties.Resources.barcode_image;
             this.OldEquipmentPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.OldEquipmentPanel.Controls.Add(this.waitingOldEquipmentLabelRus);
             this.OldEquipmentPanel.Controls.Add(this.label1);
             this.OldEquipmentPanel.Controls.Add(this.waitingOldEquipmentLabel);
             this.OldEquipmentPanel.Location = new System.Drawing.Point(40, 21);
             this.OldEquipmentPanel.Name = "OldEquipmentPanel";
             this.OldEquipmentPanel.Size = new System.Drawing.Size(227, 133);
             this.OldEquipmentPanel.TabIndex = 4;
+            // 
+            // waitingOldEquipmentLabelRus
+            // 
+            this.waitingOldEquipmentLabelRus.BackColor = System.Drawing.Color.Transparent;
+            this.waitingOldEquipmentLabelRus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.waitingOldEquipmentLabelRus.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.waitingOldEquipmentLabelRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.waitingOldEquipmentLabelRus.Location = new System.Drawing.Point(0, 74);
+            this.waitingOldEquipmentLabelRus.Name = "waitingOldEquipmentLabelRus";
+            this.waitingOldEquipmentLabelRus.Size = new System.Drawing.Size(227, 59);
+            this.waitingOldEquipmentLabelRus.TabIndex = 10;
+            this.waitingOldEquipmentLabelRus.Text = "Ожидание старого оборудования";
+            this.waitingOldEquipmentLabelRus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label1
             // 
@@ -236,6 +287,7 @@
             this.NewEquipmentPanel.BackColor = System.Drawing.Color.OldLace;
             this.NewEquipmentPanel.BackgroundImage = global::ITTerminal.Properties.Resources.barcode_image;
             this.NewEquipmentPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.NewEquipmentPanel.Controls.Add(this.waitingNewEquipmentLabelRus);
             this.NewEquipmentPanel.Controls.Add(this.label2);
             this.NewEquipmentPanel.Controls.Add(this.waitingNewEquipmentLabel);
             this.NewEquipmentPanel.Enabled = false;
@@ -243,6 +295,19 @@
             this.NewEquipmentPanel.Name = "NewEquipmentPanel";
             this.NewEquipmentPanel.Size = new System.Drawing.Size(224, 133);
             this.NewEquipmentPanel.TabIndex = 3;
+            // 
+            // waitingNewEquipmentLabelRus
+            // 
+            this.waitingNewEquipmentLabelRus.BackColor = System.Drawing.Color.Transparent;
+            this.waitingNewEquipmentLabelRus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.waitingNewEquipmentLabelRus.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.waitingNewEquipmentLabelRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.waitingNewEquipmentLabelRus.Location = new System.Drawing.Point(0, 74);
+            this.waitingNewEquipmentLabelRus.Name = "waitingNewEquipmentLabelRus";
+            this.waitingNewEquipmentLabelRus.Size = new System.Drawing.Size(224, 59);
+            this.waitingNewEquipmentLabelRus.TabIndex = 10;
+            this.waitingNewEquipmentLabelRus.Text = "Ожидание нового оборудования";
+            this.waitingNewEquipmentLabelRus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
@@ -270,6 +335,11 @@
             this.waitingNewEquipmentLabel.Text = "Waiting for a new equipment";
             this.waitingNewEquipmentLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // timer
+            // 
+            this.timer.Interval = 1500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // ExchangeMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,8 +356,8 @@
             this.Load += new System.EventHandler(this.ExchangeMenu_Load);
             this.Header.ResumeLayout(false);
             this.GeneralPanel.ResumeLayout(false);
-            this.AdminCardPanel.ResumeLayout(false);
             this.DateBox.ResumeLayout(false);
+            this.AdminCardPanel.ResumeLayout(false);
             this.OldEquipmentPanel.ResumeLayout(false);
             this.NewEquipmentPanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -307,10 +377,15 @@
         private System.Windows.Forms.Label waitingNewEquipmentLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox DateBox;
-        private System.Windows.Forms.MonthCalendar DeadlineDate;
         private System.Windows.Forms.Panel AdminCardPanel;
         private System.Windows.Forms.Label waititngCardLabel;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox DateBox;
+        private System.Windows.Forms.MonthCalendar DeadlineDate;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label MessageLabel;
+        private System.Windows.Forms.Label waitingOldEquipmentLabelRus;
+        private System.Windows.Forms.Label waitingNewEquipmentLabelRus;
+        private System.Windows.Forms.Label waititngCardLabelRus;
     }
 }

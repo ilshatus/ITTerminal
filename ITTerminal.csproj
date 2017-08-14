@@ -60,6 +60,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Input.Manipulations" />
     <Reference Include="System.Xml.Linq" />
@@ -176,7 +177,9 @@
     <None Include="Sheets\TransferSheet.xlsx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

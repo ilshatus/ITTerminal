@@ -46,13 +46,18 @@ namespace ITTerminal
                 {
                     cardReader.Read(CardId);
                     firstUser = CardManager.getUser(id);
-                    if (firstUser == null) return;
+                    if (firstUser == null)
+                    {
+                        showMessage("User is not found / Пользователь не найден");
+                        return;
+                    }
                     equipments = Connector1C.getListOfEquipment(firstUser);
                     waititngFirstCardLabel.Visible = false;
+                    waititngFirstCardLabelRus.Visible = false;
                     FirstCardPanel.BackgroundImage = Properties.Resources.tick;
                     FirstCardPanel.BackgroundImageLayout = ImageLayout.Zoom;
                     label1.Visible = true;
-                    label1.Text = "Choose equipment of " + firstUser.Name + ":";
+                    label1.Text = "Choose equipment of (Выберите оборудование)" + firstUser.Name + ":";
                     EquipmentList.Visible = true;
                     if (equipments != null)
                     {
@@ -69,15 +74,15 @@ namespace ITTerminal
                     if (secondUser == null || firstUser.Id == secondUser.Id)
                     {
                         cardReader.Read(CardId);
+                        showMessage("User is not found / Пользователь не найден");
                         return;
                     }
                     waititngSecondCardLabel.Visible = false;
+                    waititngSecondCardLabelRus.Visible = false;
                     SecondCardPanel.BackgroundImage = Properties.Resources.tick;
                     SecondCardPanel.BackgroundImageLayout = ImageLayout.Zoom;
                     label2.Visible = true;
-                    label2.Text = "New user: " + secondUser.Name;
-                    if (DeadlineDate.SelectionStart > DateTime.Today && EquipmentList.SelectedIndex != -1)
-                        SubmitButton.Enabled = true;
+                    label2.Text = "New user (Новый пользователь): " + secondUser.Name;
                 }
             };
             BeginInvoke(a);
@@ -95,6 +100,9 @@ namespace ITTerminal
             int height = GeneralPanel.Height * 40 / 100;
             int widthI = GeneralPanel.Width * 5 / 100;
             int heightI = GeneralPanel.Height * 5 / 100;
+
+            MessageLabel.Location = new Point(widthI * 6, heightI * 6);
+            MessageLabel.Size = new Size(width, height);
 
             headerLabel.Location = new Point(widthI, headerLabel.Location.Y);
 
@@ -124,28 +132,42 @@ namespace ITTerminal
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (firstUser != null && secondUser != null && EquipmentList.SelectedIndex != -1 && DeadlineDate.SelectionStart > DateTime.Today)
+            if (firstUser == null)
+            {
+                showMessage("Old user is not found / Старый пользователь не найден");
+            }
+            else if (secondUser == null)
+            {
+                showMessage("New user is not found / Новый пользователь не найден");
+            }
+            else if (EquipmentList.SelectedIndex == -1)
+            {
+                showMessage("Equipment for tranfer is not selected / Оборудование не передачи не выбрано");
+            }
+            else if (DeadlineDate.SelectionStart <= DateTime.Today)
+            {
+                showMessage("Chosen date is unavailable / Выбранная дата недоступна");
+            }
+            else
             {
                 PrintSheet.PrintTransferSheet(firstUser, secondUser, equipments[EquipmentList.SelectedIndex], DeadlineDate.SelectionStart.ToShortDateString());
-                Connector1C.returnEquipment(equipments[EquipmentList.SelectedIndex]);
-                Connector1C.getEquipment(secondUser, equipments[EquipmentList.SelectedIndex]);
+                Connector1C.transferEquipment(firstUser, secondUser, equipments[EquipmentList.SelectedIndex]);
                 cardReader.CloseConnection();
                 this.Close();
             }
         }
 
-        private void EquipmentList_SelectedIndexChanged(object sender, EventArgs e)
+        private void showMessage(string msg)
         {
-            if (secondUser != null && DeadlineDate.SelectionStart > DateTime.Today)
-                SubmitButton.Enabled = true;
+            MessageLabel.Text = msg;
+            MessageLabel.Visible = true;
+            timer.Enabled = true;
         }
 
-        private void DeadlineDate_DateChanged(object sender, DateRangeEventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            if (secondUser != null && DeadlineDate.SelectionStart > DateTime.Today && EquipmentList.SelectedIndex != -1)
-                SubmitButton.Enabled = true;
-            else
-                SubmitButton.Enabled = false;
+            MessageLabel.Visible = false;
+            timer.Enabled = false;
         }
     }
 }

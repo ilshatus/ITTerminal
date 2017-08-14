@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Header = new System.Windows.Forms.Panel();
             this.headerLabel = new System.Windows.Forms.Label();
             this.GeneralPanel = new System.Windows.Forms.Panel();
+            this.MessageLabel = new System.Windows.Forms.Label();
             this.AdminCardPanel = new System.Windows.Forms.Panel();
+            this.waititngCardLabelRus = new System.Windows.Forms.Label();
             this.waititngCardLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SubmitButton = new System.Windows.Forms.Button();
             this.EquipmentPanel = new System.Windows.Forms.Panel();
+            this.waitingEquipmentLabelRus = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.waitingEquipmentLabel = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.Header.SuspendLayout();
             this.GeneralPanel.SuspendLayout();
             this.AdminCardPanel.SuspendLayout();
@@ -63,9 +68,9 @@
             this.headerLabel.ForeColor = System.Drawing.Color.White;
             this.headerLabel.Location = new System.Drawing.Point(53, 0);
             this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(251, 29);
+            this.headerLabel.Size = new System.Drawing.Size(560, 29);
             this.headerLabel.TabIndex = 0;
-            this.headerLabel.Text = "Return equipment";
+            this.headerLabel.Text = "Return equipment / Вернуть оборудование";
             this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // GeneralPanel
@@ -74,6 +79,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GeneralPanel.BackColor = System.Drawing.Color.Transparent;
+            this.GeneralPanel.Controls.Add(this.MessageLabel);
             this.GeneralPanel.Controls.Add(this.AdminCardPanel);
             this.GeneralPanel.Controls.Add(this.SubmitButton);
             this.GeneralPanel.Controls.Add(this.EquipmentPanel);
@@ -84,18 +90,50 @@
             this.GeneralPanel.TabIndex = 0;
             this.GeneralPanel.Resize += new System.EventHandler(this.GeneralPanel_Resize);
             // 
+            // MessageLabel
+            // 
+            this.MessageLabel.AllowDrop = true;
+            this.MessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MessageLabel.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.MessageLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MessageLabel.Location = new System.Drawing.Point(306, 143);
+            this.MessageLabel.Name = "MessageLabel";
+            this.MessageLabel.Size = new System.Drawing.Size(95, 54);
+            this.MessageLabel.TabIndex = 7;
+            this.MessageLabel.Text = "label3";
+            this.MessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MessageLabel.UseCompatibleTextRendering = true;
+            this.MessageLabel.Visible = false;
+            // 
             // AdminCardPanel
             // 
             this.AdminCardPanel.BackColor = System.Drawing.Color.White;
             this.AdminCardPanel.BackgroundImage = global::ITTerminal.Properties.Resources.nfc_image;
             this.AdminCardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.AdminCardPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AdminCardPanel.Controls.Add(this.waititngCardLabelRus);
             this.AdminCardPanel.Controls.Add(this.waititngCardLabel);
             this.AdminCardPanel.Controls.Add(this.label2);
             this.AdminCardPanel.Location = new System.Drawing.Point(406, 31);
             this.AdminCardPanel.Name = "AdminCardPanel";
             this.AdminCardPanel.Size = new System.Drawing.Size(227, 133);
             this.AdminCardPanel.TabIndex = 11;
+            // 
+            // waititngCardLabelRus
+            // 
+            this.waititngCardLabelRus.BackColor = System.Drawing.Color.Transparent;
+            this.waititngCardLabelRus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.waititngCardLabelRus.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.waititngCardLabelRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.waititngCardLabelRus.Location = new System.Drawing.Point(0, 72);
+            this.waititngCardLabelRus.Name = "waititngCardLabelRus";
+            this.waititngCardLabelRus.Size = new System.Drawing.Size(225, 59);
+            this.waititngCardLabelRus.TabIndex = 7;
+            this.waititngCardLabelRus.Text = "Ожидание карты администратора";
+            this.waititngCardLabelRus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // waititngCardLabel
             // 
@@ -125,7 +163,6 @@
             // 
             // SubmitButton
             // 
-            this.SubmitButton.Enabled = false;
             this.SubmitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.SubmitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SubmitButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
@@ -135,22 +172,36 @@
             this.SubmitButton.Size = new System.Drawing.Size(98, 36);
             this.SubmitButton.TabIndex = 9;
             this.SubmitButton.TabStop = false;
-            this.SubmitButton.Text = "Submit";
+            this.SubmitButton.Text = "Submit\r\nПодтвердить";
             this.SubmitButton.UseVisualStyleBackColor = true;
             this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // EquipmentPanel
             // 
-            this.EquipmentPanel.BackColor = System.Drawing.Color.OldLace;
+            this.EquipmentPanel.BackColor = System.Drawing.Color.White;
             this.EquipmentPanel.BackgroundImage = global::ITTerminal.Properties.Resources.barcode_image;
             this.EquipmentPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.EquipmentPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EquipmentPanel.Controls.Add(this.waitingEquipmentLabelRus);
             this.EquipmentPanel.Controls.Add(this.label1);
             this.EquipmentPanel.Controls.Add(this.waitingEquipmentLabel);
             this.EquipmentPanel.Location = new System.Drawing.Point(78, 32);
             this.EquipmentPanel.Name = "EquipmentPanel";
             this.EquipmentPanel.Size = new System.Drawing.Size(227, 133);
             this.EquipmentPanel.TabIndex = 10;
+            // 
+            // waitingEquipmentLabelRus
+            // 
+            this.waitingEquipmentLabelRus.BackColor = System.Drawing.Color.Transparent;
+            this.waitingEquipmentLabelRus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.waitingEquipmentLabelRus.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.waitingEquipmentLabelRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.waitingEquipmentLabelRus.Location = new System.Drawing.Point(0, 89);
+            this.waitingEquipmentLabelRus.Name = "waitingEquipmentLabelRus";
+            this.waitingEquipmentLabelRus.Size = new System.Drawing.Size(225, 42);
+            this.waitingEquipmentLabelRus.TabIndex = 10;
+            this.waitingEquipmentLabelRus.Text = "Ожидание оборудования";
+            this.waitingEquipmentLabelRus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label1
             // 
@@ -190,9 +241,14 @@
             this.CloseButton.Size = new System.Drawing.Size(103, 36);
             this.CloseButton.TabIndex = 10;
             this.CloseButton.TabStop = false;
-            this.CloseButton.Text = "Back to Menu";
+            this.CloseButton.Text = "Back to Menu\r\nВернуться в меню";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // ReturnMenu
             // 
@@ -229,5 +285,9 @@
         private System.Windows.Forms.Panel AdminCardPanel;
         private System.Windows.Forms.Label waititngCardLabel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label MessageLabel;
+        private System.Windows.Forms.Label waitingEquipmentLabelRus;
+        private System.Windows.Forms.Label waititngCardLabelRus;
     }
 }

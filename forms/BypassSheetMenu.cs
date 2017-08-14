@@ -42,14 +42,16 @@ namespace ITTerminal
                 if (user == null)
                 {
                     cardReader.Read(CardId);
+                    showMessage("User is not found / Пользователь не найден");
                     return;
                 }
                 equipments = Connector1C.getListOfEquipment(user);
                 waititngCardLabel.Visible = false;
+                waititngCardLabelRus.Visible = false;
                 CardPanel.BackgroundImage = Properties.Resources.tick;
                 CardPanel.BackgroundImageLayout = ImageLayout.Zoom;
                 label1.Visible = true;
-                label1.Text = user.Name + ", you have following attached equipments:";
+                label1.Text = user.Name + ", you have following attached equipments (за вами закреплены следующие оборудования):";
                 EquipmentList.Visible = true;
                 if (equipments != null)
                 {
@@ -70,10 +72,16 @@ namespace ITTerminal
             Header.Location = new Point(0, 10);
             Header.Size = new Size(this.Size.Width, 60);
             //Elements
-            int width = GeneralPanel.Width * 60 / 100;
-            int height = GeneralPanel.Height * 70 / 100;
+            int width = GeneralPanel.Width * 40 / 100;
+            int height = GeneralPanel.Height * 40 / 100;
             int widthI = GeneralPanel.Width * 5 / 100;
             int heightI = GeneralPanel.Height * 5 / 100;
+
+            MessageLabel.Location = new Point(widthI * 6, heightI * 6);
+            MessageLabel.Size = new Size(width, height);
+
+            width = GeneralPanel.Width * 60 / 100;
+            height = GeneralPanel.Height * 70 / 100;
 
             headerLabel.Location = new Point(widthI, headerLabel.Location.Y);
 
@@ -89,6 +97,19 @@ namespace ITTerminal
         {
             cardReader.CloseConnection();
             this.Close();
+        }
+
+        private void showMessage(string msg)
+        {
+            MessageLabel.Text = msg;
+            MessageLabel.Visible = true;
+            timer.Enabled = true;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            MessageLabel.Visible = false;
+            timer.Enabled = false;
         }
     }
 }

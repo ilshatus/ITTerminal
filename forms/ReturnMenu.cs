@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+
 
 
 namespace ITTerminal
 {
     partial class ReturnMenu : TerminalForm
     {
-        private string user;
+        private User user;
         private Equipment equipment;
         private User admin;
         private CardReader cardReader;
         private BarcodeReader barcodeReader;
+        private static string status = ConfigurationManager.ConnectionStrings["status"].ConnectionString;
+
 
         public ReturnMenu()
         {
@@ -48,14 +52,15 @@ namespace ITTerminal
             if (equipment == null)
             {
                 barcodeReader.Read(EquipmentId);
+                showMessage("Equipment is not found / Оборудование не найдено");
                 return;
             }
             waitingEquipmentLabel.Visible = false;
+            waitingEquipmentLabelRus.Visible = false;
             EquipmentPanel.BackgroundImage = Properties.Resources.tick;
-            user = Connector1C.whereIsEquipment(id);
+            user = Connector1C.equipmentPlace(id);
             label1.Visible = true;
-            label1.Text = "User: " + user + "\nEquipment: " + equipment.Name;
-            if (admin != null) SubmitButton.Enabled = true;
+            label1.Text = "User (Пользователь): " + user.Name + "\nEquipment (Оборудование): " + equipment.Name;
         }
 
         public override void CardId(string id)
@@ -65,17 +70,19 @@ namespace ITTerminal
                 if (admin == null)
                 {
                     admin = CardManager.getUser(id);
-                    if (admin == null || admin.Position != "Сотрудник")
+                    if (admin == null || admin.Position != status)
                     {
+                        admin = null;
                         cardReader.Read(CardId);
+                        showMessage("Admin is not found / Администратор не найден");
                         return;
                     }
                     waititngCardLabel.Visible = false;
+                    waititngCardLabelRus.Visible = false;
                     AdminCardPanel.BackgroundImage = Properties.Resources.tick;
                     AdminCardPanel.BackgroundImageLayout = ImageLayout.Zoom;
                     label2.Visible = true;
-                    label2.Text = "Admin: " + admin.Name;
-                    if (equipment != null) SubmitButton.Enabled = true;
+                    label2.Text = "Admin (Администратор): " + admin.Name;
                 }
             };
             BeginInvoke(a);
@@ -95,6 +102,9 @@ namespace ITTerminal
             int height = GeneralPanel.Height * 40 / 100;
             int widthI = GeneralPanel.Width * 5 / 100;
             int heightI = GeneralPanel.Height * 5 / 100;
+
+            MessageLabel.Location = new Point(widthI * 6, heightI * 6);
+            MessageLabel.Size = new Size(width, height);
 
             headerLabel.Location = new Point(widthI, headerLabel.Location.Y);
 
@@ -122,12 +132,33 @@ namespace ITTerminal
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (equipment != null) {
-                PrintSheet.PrintReturnSheet(new User(user, ""), equipment);
-                Connector1C.returnEquipment(equipment);
-                Connector1C.getEquipment(admin, equipment);
+            if (equipment == null)
+            {
+                showMessage("Equipment is not found / Оборудование не найдено");
+            }
+            else if (admin == null)
+            {
+                showMessage("Admin is not found / Администратор не найден");
+            }
+            else {
+                PrintSheet.PrintReturnSheet(new User(user.Name, ""), equipment);
+                Connector1C.transferEquipment(user, admin, equipment);
+                cardReader.CloseConnection();
                 this.Close();
             }
+        }
+
+        private void showMessage(string msg)
+        {
+            MessageLabel.Text = msg;
+            MessageLabel.Visible = true;
+            timer.Enabled = true;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            MessageLabel.Visible = false;
+            timer.Enabled = false;
         }
     }
 }

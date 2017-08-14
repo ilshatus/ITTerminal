@@ -88,12 +88,25 @@ namespace ITTerminal
             int ind = 5;
             int height = (GeneralPanel.Height - 2 * ind - 2) / 3;
             int width = (GeneralPanel.Width - ind - 2) / 2;
+
             Get.Size = new Size(width, height);
+            Get.MaximumSize = new Size(width, height);
+
             Return.Size = new Size(width, height);
+            Return.MaximumSize  = new Size(width, height);
+
             Transfer.Size = new Size(width, height);
+            Transfer.MaximumSize = new Size(width, height);
+
             Exchange.Size = new Size(width, height);
+            Exchange.MaximumSize = new Size(width, height);
+
             Lost.Size = new Size(width, height);
+            Lost.MaximumSize = new Size(width, height);
+
             GetBypassSheet.Size = new Size(width, height);
+            GetBypassSheet.MaximumSize = new Size(width, height);
+
             Get.Location = new Point(1, 1);
             Return.Location = new Point(width + 1 + ind, 1);
             Transfer.Location = new Point(1, height + ind + 1);

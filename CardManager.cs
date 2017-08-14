@@ -37,8 +37,8 @@ namespace ITTerminal
                     if (status.Equals("Действует") && (position.Contains("Сотрудник") || position.Contains("Студент")))
                     {
                         if (sname_ru != null && !sname_ru.Equals(""))
-                            return new User(surname_ru + " " + name_ru + " " + sname_ru, card_id);
-                        else return new User(surname_ru + " " + name_ru, card_id);
+                            return new User(surname_ru + " " + name_ru + " " + sname_ru, card_id, position);
+                        else return new User(surname_ru + " " + name_ru, card_id, position);
                     }
                 }
                 reader.Close();

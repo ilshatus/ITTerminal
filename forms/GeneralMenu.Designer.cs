@@ -46,12 +46,13 @@
             this.Get.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Get.Font = new System.Drawing.Font("Franklin Gothic Heavy", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Get.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Get.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Get.Location = new System.Drawing.Point(15, 13);
             this.Get.Name = "Get";
-            this.Get.Size = new System.Drawing.Size(261, 161);
+            this.Get.Size = new System.Drawing.Size(924, 161);
             this.Get.TabIndex = 0;
             this.Get.TabStop = false;
-            this.Get.Text = "Get Equipment";
+            this.Get.Text = "Get Equipment / Получить оборудование";
             this.Get.UseVisualStyleBackColor = false;
             this.Get.Click += new System.EventHandler(this.GET_Click);
             // 
@@ -65,10 +66,10 @@
             this.Return.Location = new System.Drawing.Point(282, 13);
             this.Return.Name = "Return";
             this.Return.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Return.Size = new System.Drawing.Size(263, 161);
+            this.Return.Size = new System.Drawing.Size(586, 161);
             this.Return.TabIndex = 1;
             this.Return.TabStop = false;
-            this.Return.Text = "Return Equipment";
+            this.Return.Text = "Return Equipment / Вернуть оборудование";
             this.Return.UseVisualStyleBackColor = true;
             this.Return.Click += new System.EventHandler(this.Return_Click);
             // 
@@ -81,10 +82,10 @@
             this.Transfer.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Transfer.Location = new System.Drawing.Point(15, 177);
             this.Transfer.Name = "Transfer";
-            this.Transfer.Size = new System.Drawing.Size(277, 161);
+            this.Transfer.Size = new System.Drawing.Size(638, 161);
             this.Transfer.TabIndex = 2;
             this.Transfer.TabStop = false;
-            this.Transfer.Text = "Transfer Equipment";
+            this.Transfer.Text = "Transfer Equipment / Передать оборудование";
             this.Transfer.UseVisualStyleBackColor = true;
             this.Transfer.Click += new System.EventHandler(this.Transfer_Click);
             // 
@@ -97,10 +98,10 @@
             this.GetBypassSheet.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.GetBypassSheet.Location = new System.Drawing.Point(282, 343);
             this.GetBypassSheet.Name = "GetBypassSheet";
-            this.GetBypassSheet.Size = new System.Drawing.Size(263, 155);
+            this.GetBypassSheet.Size = new System.Drawing.Size(591, 155);
             this.GetBypassSheet.TabIndex = 5;
             this.GetBypassSheet.TabStop = false;
-            this.GetBypassSheet.Text = "Get Bypass Sheet";
+            this.GetBypassSheet.Text = "Get Bypass Sheet / Получить обходной лист";
             this.GetBypassSheet.UseVisualStyleBackColor = true;
             this.GetBypassSheet.Click += new System.EventHandler(this.GetBypassSheet_Click);
             // 
@@ -113,10 +114,10 @@
             this.Lost.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Lost.Location = new System.Drawing.Point(15, 343);
             this.Lost.Name = "Lost";
-            this.Lost.Size = new System.Drawing.Size(261, 155);
+            this.Lost.Size = new System.Drawing.Size(521, 155);
             this.Lost.TabIndex = 4;
             this.Lost.TabStop = false;
-            this.Lost.Text = "Lost Equipment";
+            this.Lost.Text = "Lost Equipment / Утеря оборудования";
             this.Lost.UseVisualStyleBackColor = true;
             this.Lost.Click += new System.EventHandler(this.Lost_Click);
             // 
@@ -129,10 +130,10 @@
             this.Exchange.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Exchange.Location = new System.Drawing.Point(282, 180);
             this.Exchange.Name = "Exchange";
-            this.Exchange.Size = new System.Drawing.Size(295, 155);
+            this.Exchange.Size = new System.Drawing.Size(647, 155);
             this.Exchange.TabIndex = 3;
             this.Exchange.TabStop = false;
-            this.Exchange.Text = "Exchange Equipment";
+            this.Exchange.Text = "Exchange Equipment / Обменять оборудование";
             this.Exchange.UseVisualStyleBackColor = true;
             this.Exchange.Click += new System.EventHandler(this.Exchange_Click);
             // 

@@ -11,10 +11,7 @@ namespace ITTerminal
         private static Excel.Application excelapp;
         private static Excel.Workbook workbook;
         private static Excel.Worksheet worksheet;
-
-        //DON'T FORGET CHANGE 4th ROW OF ALL EXCEL FILES
-        //DONT FORGET CHECK FOR CORECTNESS OF ALL EXCEL TEMPLATES.
-        
+       
         public static void PrintGetSheet(User user, Equipment equipment, String date)
         {
             //  INPUT NEEDED INFORMATION
@@ -35,19 +32,20 @@ namespace ITTerminal
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
             worksheet.Cells[7, 2] = ConfigurationManager.ConnectionStrings["stockName"].ConnectionString;
-            worksheet.Cells[9, 2] = user.Name;
-            worksheet.Cells[12, 1] = equipment.Name;
-            worksheet.Cells[12, 2] = equipment.Type;
-            worksheet.Cells[12, 3] = equipment.Id;
-            worksheet.Cells[12, 4] = equipment.Serial;
-            worksheet.Cells[15, 1] = "Обязуюсь вернуть до: " + date.ToString();
+            worksheet.Cells[9, 2] = user.Name.ToString();
+            worksheet.Cells[12, 1] = equipment.Name.ToString();
+            worksheet.Cells[12, 4] = equipment.Id.ToString();
+            worksheet.Cells[15, 1] = equipment.Type.ToString();
+            worksheet.Cells[15, 3] = "№" + equipment.Serial.ToString();
+            worksheet.Cells[18, 1] = "Обязуюсь вернуть до: " + date.ToString();
 
-            //  PRINT SHEET
+            // SHEETS PRINTING
             Drawing.Printing.PrinterSettings settings = new Drawing.Printing.PrinterSettings();
             String printerName = settings.PrinterName.ToString();
             worksheet.PrintOutEx(1, 1, 2, false, printerName,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
+            // EXCEL FILE CLOSING
             workbook.Close(false, Type.Missing, Type.Missing);
             excelapp.Quit();
             GC.Collect();
@@ -73,19 +71,19 @@ namespace ITTerminal
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
             worksheet.Cells[7, 2] = ConfigurationManager.ConnectionStrings["stockName"].ConnectionString;
-            worksheet.Cells[9, 2] = user.Name;
-            worksheet.Cells[12, 1] = equipment.Name;
-            worksheet.Cells[12, 2] = equipment.Type;
-            worksheet.Cells[12, 3] = equipment.Id;
-            worksheet.Cells[12, 4] = equipment.Serial;
+            worksheet.Cells[9, 2] = user.Name.ToString();
+            worksheet.Cells[12, 1] = equipment.Name.ToString();
+            worksheet.Cells[12, 4] = equipment.Id.ToString();
+            worksheet.Cells[15, 1] = equipment.Type.ToString();
+            worksheet.Cells[15, 3] = "№" + equipment.Serial.ToString();
 
             //  PRINT SHEET
             Drawing.Printing.PrinterSettings settings = new Drawing.Printing.PrinterSettings();
-            
             String printerName = settings.PrinterName.ToString();
             worksheet.PrintOutEx(1, 1, 2, false, printerName,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
+            //  EXCEL FILE CLOSING
             workbook.Close(false, Type.Missing, Type.Missing);
             excelapp.Quit();
             GC.Collect();
@@ -110,13 +108,13 @@ namespace ITTerminal
             }
             worksheet = (Excel.Worksheet)workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
-            worksheet.Cells[7, 2] = toUser.Name;
-            worksheet.Cells[9, 2] = fromUser.Name;
-            worksheet.Cells[12, 1] = equipment.Name;
-            worksheet.Cells[12, 2] = equipment.Type;
-            worksheet.Cells[12, 3] = equipment.Id;
-            worksheet.Cells[12, 4] = equipment.Serial;
-            worksheet.Cells[15, 1] = "Обязуюсь вернуть до: " + date.ToString();
+            worksheet.Cells[7, 2] = toUser.Name.ToString();
+            worksheet.Cells[9, 2] = fromUser.Name.ToString();
+            worksheet.Cells[12, 1] = equipment.Name.ToString();
+            worksheet.Cells[12, 4] = equipment.Id.ToString();
+            worksheet.Cells[15, 1] = equipment.Type.ToString();
+            worksheet.Cells[15, 3] = "№" + equipment.Serial.ToString();
+            worksheet.Cells[17, 1] = "Обязуюсь вернуть до: " + date.ToString();
 
             //  PRINT SHEET
             Drawing.Printing.PrinterSettings settings = new Drawing.Printing.PrinterSettings();
@@ -124,6 +122,7 @@ namespace ITTerminal
             worksheet.PrintOutEx(1, 1, 2, false, printerName,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
+            //  EXCEL FILE CLOSING
             workbook.Close(false, Type.Missing, Type.Missing);
             excelapp.Quit();
             GC.Collect();
@@ -148,23 +147,24 @@ namespace ITTerminal
             }
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
-            worksheet.Cells[7, 2] = user.Name;
-            worksheet.Cells[11, 1] = oldEquipment.Name;
-            worksheet.Cells[11, 2] = oldEquipment.Type;
-            worksheet.Cells[11, 3] = oldEquipment.Id;
-            worksheet.Cells[11, 4] = oldEquipment.Serial;
-            worksheet.Cells[16, 1] = newEquipment.Name;
-            worksheet.Cells[16, 2] = newEquipment.Type;
-            worksheet.Cells[16, 3] = newEquipment.Id;
-            worksheet.Cells[16, 4] = newEquipment.Serial;
-            worksheet.Cells[19, 1] = "Обязуюсь вернуть до: " + date.ToString();
+            worksheet.Cells[7, 2] = user.Name.ToString();
+            worksheet.Cells[11, 1] = oldEquipment.Name.ToString();
+            worksheet.Cells[11, 4] = oldEquipment.Id.ToString();
+            worksheet.Cells[14, 1] = oldEquipment.Type.ToString();
+            worksheet.Cells[14, 3] = "№" + oldEquipment.Serial.ToString();
+            worksheet.Cells[19, 1] = newEquipment.Name.ToString();
+            worksheet.Cells[19, 4] = newEquipment.Id.ToString();
+            worksheet.Cells[22, 1] = newEquipment.Type.ToString();
+            worksheet.Cells[22, 3] = "№" + newEquipment.Serial.ToString();
+            worksheet.Cells[24, 1] = "Обязуюсь вернуть до: " + date.ToString();
 
-            //  PRINT SHEET
+            //  SHEETS PRINTING
             Drawing.Printing.PrinterSettings settings = new Drawing.Printing.PrinterSettings();
             String printerName = settings.PrinterName.ToString();
-            worksheet.PrintOutEx(1, 1, 2, false, 
+            worksheet.PrintOutEx(1, 1, 2, false,
                 printerName, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-
+            
+            //  EXCEL FILE CLOSING
             workbook.Close(false, Type.Missing, Type.Missing);
             excelapp.Quit();
             GC.Collect();
@@ -189,19 +189,20 @@ namespace ITTerminal
             }
             worksheet = (Excel.Worksheet) workbook.Sheets[1];
             worksheet.Cells[3, 1] = "Дата: " + DateTime.Now.ToString();
-            worksheet.Cells[8, 2] = user.Name;
-            worksheet.Cells[12, 1] = equipment.Name;
-            worksheet.Cells[12, 2] = equipment.Type;
-            worksheet.Cells[12, 3] = equipment.Id;
-            worksheet.Cells[12, 4] = equipment.Serial;
+            worksheet.Cells[8, 2] = user.Name.ToString();
+            worksheet.Cells[11, 1] = equipment.Name.ToString();
+            worksheet.Cells[11, 4] = equipment.Id.ToString();
+            worksheet.Cells[14, 1] = equipment.Type.ToString();
+            worksheet.Cells[14, 3] = "№" + equipment.Serial.ToString();
 
-            //  PRINT SHEET
+            //  SHEETS PRINTING
             Drawing.Printing.PrinterSettings settings = new Drawing.Printing.PrinterSettings();
             String printerName = settings.PrinterName.ToString();
-            worksheet.PrintOutEx(1, 1, 2, false, 
+            worksheet.PrintOutEx(1, 1, 2, false,
                 printerName, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
-            workbook.Save();
+            //  EXCEL FILE CLOSING
+            workbook.Close(false, Type.Missing, Type.Missing);
             excelapp.Quit();
             GC.Collect();
         }

@@ -17,8 +17,7 @@ namespace ITTerminal
         static string page = ConfigurationManager.ConnectionStrings["ConnectionToBase"].ConnectionString;
 
         /// <summary>
-        /// This method moves equipment from one place to another. All the parameters must be given as a string
-        /// and must be exactly as in 1c base.
+        /// This method moves equipment from one place to another.
         /// </summary>
         /// <param name="orgFrom">from which organization</param>
         /// <param name="orgTo">to which organization</param>
@@ -52,10 +51,6 @@ namespace ITTerminal
             {
                 return false;
             }
-
-            /*Stream stream = response.GetResponseStream();
-            StreamReader streamReader = new StreamReader(stream);
-            return streamReader.ReadToEnd();*/
             response.Close();
             return true;
         }
@@ -71,7 +66,7 @@ namespace ITTerminal
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
-            request.Credentials = new System.Net.NetworkCredential("1cTeam1", "k&jH32!4qS");
+            request.Credentials = new System.Net.NetworkCredential(login, password);
 
             HttpWebResponse response;
             try
@@ -106,7 +101,7 @@ namespace ITTerminal
         /// </summary>
         /// <param name="ID">equipment ID</param>
         /// <returns>string if equipment exists and no errors occured, null - otherwise.</returns>
-        public static string whereIsEquipment(string ID)
+        private static string whereIsEquipment(string ID)
         {
             StringBuilder requestString = new StringBuilder(page + "hs/whos/" + ID);
 
@@ -134,6 +129,25 @@ namespace ITTerminal
             streamReader.Close();
 
             return name;
+        }
+
+        public static User equipmentPlace(string ID)
+        {
+            string s = whereIsEquipment(ID);
+            string id = "";
+            string name = "";
+            int i = 0;
+            for (; i < s.Length; i++)
+            {
+                if (s[i] == ' ') break;
+                id += s[i];
+            }
+            i++;
+            for (; i < s.Length; i++)
+            {
+                name += s[i];
+            }
+            return new User(name, id);
         }
 
         /// <summary>
@@ -184,7 +198,7 @@ namespace ITTerminal
         /// <returns>Array of equipment, which the place have.</returns>
         public static Equipment[] getListOfEquipment(User user)
         {
-            StringBuilder requestString = new StringBuilder(page + "hs/getList/" + user.Name);
+            StringBuilder requestString = new StringBuilder(page + "hs/getList/" + user.Id);
 
             WebRequest request = WebRequest.Create(requestString.ToString());
 
@@ -222,7 +236,7 @@ namespace ITTerminal
             string placeWhere = whereIsEquipment(equipment.Id);
             if (placeWhere == null || placeWhere.Equals("Утеряно"))
                 return false;
-            return moveEquipment(orgName, orgName, placeWhere, user.Name, equipment.Id);
+            return moveEquipment(orgName, orgName, placeWhere, user.Id, equipment.Id);
         }
 
         public static bool returnEquipment(Equipment equipment)
@@ -237,6 +251,10 @@ namespace ITTerminal
         {
             string placeWhere = whereIsEquipment(equipment.Id);
             return moveEquipment(orgName, orgName, placeWhere, "Утеряно", equipment.Id);
+        }
+
+        public static bool transferEquipment(User user1, User user2, Equipment equipment) {
+            return moveEquipment(orgName, orgName, user1.Id, user2.Id, equipment.Id);
         }
     }
 }

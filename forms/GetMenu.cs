@@ -25,6 +25,7 @@ namespace ITTerminal
             ////////////////////////
             CardPanel.BackColor = Color.FromArgb(150, 255, 255, 255);
             EquipmentPanel.BackColor = Color.FromArgb(150, 255, 255, 255);
+            //MessageLabel.BackColor = Color.FromArgb(50, 0, 0, 0);
             ////////////////////////
             CloseButton.BackColor = Color.FromArgb(130, 255, 255, 255);
             CloseButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 255, 255, 255);
@@ -52,15 +53,15 @@ namespace ITTerminal
                     if (user == null)
                     {
                         cardReader.Read(CardId);
+                        showMessage("User is not found / Пользователь не найден");
                         return;
                     }
                     waititngCardLabel.Visible = false;
+                    waititngCardLabelRus.Visible = false;
                     CardPanel.BackgroundImage = Properties.Resources.tick;
                     CardPanel.BackgroundImageLayout = ImageLayout.Zoom;
                     label1.Visible = true;
-                    label1.Text = "User: " + user.Name;
-                    if (equipment != null && DeadlineDate.SelectionStart > DateTime.Today)
-                        SubmitButton.Enabled = true;
+                    label1.Text = "User (Пользователь): " + user.Name;
                 }
             };
             BeginInvoke(a);
@@ -74,15 +75,15 @@ namespace ITTerminal
                 if (equipment != null)
                 {
                     waitingEquipmentLabel.Visible = false;
+                    waitingEquipmentLabelRus.Visible = false;
                     EquipmentPanel.BackgroundImage = Properties.Resources.tick;
                     label2.Visible = true;
-                    label2.Text = "Equipment: " + equipment.Name;
-                    if (user != null && DeadlineDate.SelectionStart > DateTime.Today)
-                        SubmitButton.Enabled = true;
+                    label2.Text = "Equipment (Оборудование): " + equipment.Name;
                 }
                 else
                 {
                     barcodeReader.Read(EquipmentId);
+                    showMessage("Equipment is not found / Оборудование не найдено");
                 }
             }
         }
@@ -100,13 +101,18 @@ namespace ITTerminal
             int widthI = GeneralPanel.Width * 5 / 100;
             int heightI = GeneralPanel.Height * 5 / 100;
 
+            MessageLabel.Location = new Point(widthI * 6, heightI * 6);
+            MessageLabel.Size = new Size(width, height);
+
             headerLabel.Location = new Point(widthI, headerLabel.Location.Y);
 
             CardPanel.Location = new Point(widthI, heightI);
             CardPanel.Size = new Size(width, height);
+            CardPanel.MaximumSize = new Size(width, height);
 
             EquipmentPanel.Location = new Point(3 * widthI + width, heightI);
             EquipmentPanel.Size = new Size(width, height);
+            EquipmentPanel.MaximumSize = new Size(width, height);
 
             DateBox.Location = new Point(widthI, 2 * heightI + height);
             DateBox.Size = new Size(DeadlineDate.Width + 25, DeadlineDate.Height + 25);
@@ -130,7 +136,19 @@ namespace ITTerminal
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (user != null && equipment != null && DeadlineDate.SelectionStart > DateTime.Today)
+            if (user == null)
+            {
+                showMessage("User is not found / Пользователь не найден");
+            } 
+            else if (equipment == null)
+            {
+                showMessage("Equipment is not found / Оборудование не найдено");
+            }
+            else if (DeadlineDate.SelectionStart <= DateTime.Today)
+            {
+                showMessage("Chosen date is unavailable / Выбранная дата недоступна");
+            }
+            else
             {
                 PrintSheet.PrintGetSheet(user, equipment, DeadlineDate.SelectionStart.ToShortDateString());
                 Connector1C.getEquipment(user, equipment);
@@ -140,12 +158,18 @@ namespace ITTerminal
 
         }
 
-        private void DeadlineDate_DateChanged(object sender, DateRangeEventArgs e)
+        private void showMessage(string msg)
         {
-            if (user != null && equipment != null && DeadlineDate.SelectionStart > DateTime.Today)
-                SubmitButton.Enabled = true;
-            else
-                SubmitButton.Enabled = false;
+            MessageLabel.Text = msg;
+            MessageLabel.Visible = true;
+            timer.Enabled = true;
         }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            MessageLabel.Visible = false;
+            timer.Enabled = false;
+        }
+
     }
 }
