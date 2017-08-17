@@ -77,6 +77,7 @@
             this.GeneralPanel.BackColor = System.Drawing.Color.Transparent;
             this.GeneralPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.GeneralPanel.Controls.Add(this.CloseButton);
+            this.GeneralPanel.Controls.Add(this.MessageLabel);
             this.GeneralPanel.Controls.Add(this.CardPanel);
             this.GeneralPanel.Location = new System.Drawing.Point(12, 53);
             this.GeneralPanel.Name = "GeneralPanel";
@@ -107,7 +108,6 @@
             this.CardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.CardPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CardPanel.Controls.Add(this.waititngCardLabelRus);
-            this.CardPanel.Controls.Add(this.MessageLabel);
             this.CardPanel.Controls.Add(this.waititngCardLabel);
             this.CardPanel.Controls.Add(this.EquipmentList);
             this.CardPanel.Controls.Add(this.label1);
@@ -138,7 +138,7 @@
             this.MessageLabel.BackColor = System.Drawing.Color.PaleTurquoise;
             this.MessageLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MessageLabel.Location = new System.Drawing.Point(150, 119);
+            this.MessageLabel.Location = new System.Drawing.Point(300, 154);
             this.MessageLabel.Name = "MessageLabel";
             this.MessageLabel.Size = new System.Drawing.Size(95, 54);
             this.MessageLabel.TabIndex = 2;

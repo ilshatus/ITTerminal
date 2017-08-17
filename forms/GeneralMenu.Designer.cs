@@ -49,7 +49,7 @@
             this.Get.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Get.Location = new System.Drawing.Point(15, 13);
             this.Get.Name = "Get";
-            this.Get.Size = new System.Drawing.Size(924, 161);
+            this.Get.Size = new System.Drawing.Size(556, 161);
             this.Get.TabIndex = 0;
             this.Get.TabStop = false;
             this.Get.Text = "Get Equipment / Получить оборудование";
@@ -63,7 +63,7 @@
             this.Return.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Return.Font = new System.Drawing.Font("Franklin Gothic Heavy", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Return.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Return.Location = new System.Drawing.Point(282, 13);
+            this.Return.Location = new System.Drawing.Point(577, 13);
             this.Return.Name = "Return";
             this.Return.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Return.Size = new System.Drawing.Size(586, 161);
@@ -82,7 +82,7 @@
             this.Transfer.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Transfer.Location = new System.Drawing.Point(15, 177);
             this.Transfer.Name = "Transfer";
-            this.Transfer.Size = new System.Drawing.Size(638, 161);
+            this.Transfer.Size = new System.Drawing.Size(622, 161);
             this.Transfer.TabIndex = 2;
             this.Transfer.TabStop = false;
             this.Transfer.Text = "Transfer Equipment / Передать оборудование";
@@ -151,7 +151,7 @@
             this.GeneralPanel.Controls.Add(this.Exchange);
             this.GeneralPanel.Location = new System.Drawing.Point(12, 12);
             this.GeneralPanel.Name = "GeneralPanel";
-            this.GeneralPanel.Size = new System.Drawing.Size(561, 506);
+            this.GeneralPanel.Size = new System.Drawing.Size(1070, 506);
             this.GeneralPanel.TabIndex = 6;
             this.GeneralPanel.Resize += new System.EventHandler(this.panel1_Resize);
             // 
@@ -160,7 +160,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(585, 530);
+            this.ClientSize = new System.Drawing.Size(1094, 530);
             this.Controls.Add(this.GeneralPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GeneralMenu";

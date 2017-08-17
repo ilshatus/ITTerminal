@@ -7,9 +7,9 @@ namespace ITTerminal
     class CardManager
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        private static string sqlExpression1 = "SELECT TOP 1 [surname_ru],[name_ru],[sname_ru],[position],[status],[Card ID] FROM [team1_test_skip_card].[dbo].[data] WHERE [Card ID] = @card_id";
-        private static string sqlExpression2 = "SELECT TOP 1 [surname_ru],[name_ru],[sname_ru],[position],[status],[Card ID] FROM [team1_test_skip_card].[dbo].[data] WHERE [surname_ru] = @surname AND [name_ru] = @name";
-        private static string sqlExpression3 = "SELECT TOP 1 [surname_ru],[name_ru],[sname_ru],[position],[status],[Card ID] FROM [team1_test_skip_card].[dbo].[data] WHERE [surname_ru] = @surname AND [name_ru] = @name AND [sname_ru] = @sname";
+        private static string sqlExpression1 = "SELECT TOP 1 [surname_ru],[name_ru],[sname_ru],[position],[status],[Card ID] FROM ["+ConfigurationManager.ConnectionStrings["tableName"].ConnectionString+"].[dbo].[data] WHERE [Card ID] = @card_id";
+        private static string sqlExpression2 = "SELECT TOP 1 [surname_ru],[name_ru],[sname_ru],[position],[status],[Card ID] FROM ["+ConfigurationManager.ConnectionStrings["tableName"].ConnectionString+"].[dbo].[data] WHERE [surname_ru] = @surname AND [name_ru] = @name";
+        private static string sqlExpression3 = "SELECT TOP 1 [surname_ru],[name_ru],[sname_ru],[position],[status],[Card ID] FROM ["+ConfigurationManager.ConnectionStrings["tableName"].ConnectionString+"].[dbo].[data] WHERE [surname_ru] = @surname AND [name_ru] = @name AND [sname_ru] = @sname";
 
 
         //Returns User or null.
